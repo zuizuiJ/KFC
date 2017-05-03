@@ -10,3 +10,78 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+
+
+public class Meal{
+	
+  private String food;
+  private String drink;
+  public void setFood(String food){
+    this.food=food;
+  }
+  public void setDrink(String drink){
+    this.drink=drink;
+  
+  }
+  public String getFood(){
+    return food;
+  }
+  public String getDrink(){
+    return drink;
+  }
+
+
+}
+
+
+ abstract class MealBuilder{
+  protected  Meal meal=new Meal();
+	
+	public abstract void buildFood();
+	public abstract void buildDrink();
+	
+	public Meal getMeal()
+	{
+		return meal;
+	}
+
+
+}
+
+class SubMealBuilderA extends MealBuilder{
+  public void buildFood(){};
+  public void buildDrink(){};
+  
+}
+
+
+
+ class KFCWaiter{
+	 
+	private MealBuilder mb;
+	
+	
+	public void setMealBuilder(MealBuilder mb)
+	{
+		this.mb=mb;
+	}
+	
+	public Meal construct()
+	{
+	mb.buildFood();
+	  mb.buildDrink();
+	  return mb.getMeal();
+	}
+ 
+
+public static void main(String args[]){
+
+MealBuilder mb = new SubMealBuilderA();
+KFCWaiter waiter = new KFCWaiter();
+Meal meal = waiter.construct();
+
+}
+ }
+
+
+
